@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: {{ required "Missing value NSG_INGRESSNAME" .Values.NSG_INGRESSNAME }}
+  namespace: {{ required "Missing value NAMESPACE" .Values.NAMESPACE }}
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    kubernetes.io/ingress.global-static-ip-name: {{ required "Missing value NSG_INGRESS_IP_NAME" .Values.NSG_INGRESS_IP_NAME }}
+    ingress.gcp.kubernetes.io/pre-shared-cert: {{ required "Missing value NSG_ALL_CERT_NAMES" .Values.NSG_ALL_CERT_NAMES | quote }}
+spec:
+  rules:
+  - host: {{ required "Missing value NSG_INGRESS_HOSTNAME_ENV" .Values.NSG_INGRESS_HOSTNAME_ENV }}
+    http:
+      paths:
+      - path: /*
+        backend:
+          serviceName: nsg-referenceimplementation
+          servicePort: 8080
+  tls:
+  - hosts:
+    - {{ required "Missing value NSG_INGRESS_HOSTNAME_ENV" .Values.NSG_INGRESS_HOSTNAME_ENV }}
+    secretName: {{ required "Missing value NSG_CERT_NAME_ENV" .Values.NSG_CERT_NAME_ENV }}

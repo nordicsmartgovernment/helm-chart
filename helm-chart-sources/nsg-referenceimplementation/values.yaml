@@ -1,0 +1,6 @@
+# Default values for nsg-referenceimplementation.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+##nsg-referenceimplementation
+NSG_REFERENCEIMPLEMENTATION_MEMORY: "600Mi"

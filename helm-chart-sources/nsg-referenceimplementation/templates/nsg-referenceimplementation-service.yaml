@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    nsg.service: nsg-referenceimplementation
+  name: nsg-referenceimplementation
+  namespace: {{ required "Missing value NAMESPACE" .Values.NAMESPACE }}
+spec:
+  type: NodePort
+  ports:
+  - name: "8080"
+    port: 8080
+    targetPort: 8080
+  selector:
+    nsg.service: nsg-referenceimplementation
+status:
+  loadBalancer: {}

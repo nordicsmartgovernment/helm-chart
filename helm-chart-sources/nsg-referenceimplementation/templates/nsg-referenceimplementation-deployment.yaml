@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    nsg.service: nsg-referenceimplementation
+  name: nsg-referenceimplementation
+  namespace: {{ required "Missing value NAMESPACE" .Values.NAMESPACE }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      nsg.service: nsg-referenceimplementation
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        nsg.service: nsg-referenceimplementation
+    spec:
+      containers:
+      - env:
+        - name: NSG_POSTGRES_DB_URL
+          value: {{ required "Missing value NSG_POSTGRES_DB_URL" .Values.NSG_POSTGRES_DB_URL | quote }}
+        - name: NSG_POSTGRES_DBO_USER
+          value: {{ required "Missing value NSG_POSTGRES_DBO_USER" .Values.NSG_POSTGRES_DBO_USER | quote }}
+        - name: NSG_POSTGRES_DBO_PASSWORD
+          value: {{ required "Missing value NSG_POSTGRES_DBO_PASSWORD" .Values.NSG_POSTGRES_DBO_PASSWORD | quote }}
+        - name: NSG_POSTGRES_USER
+          value: {{ required "Missing value NSG_POSTGRES_USER" .Values.NSG_POSTGRES_USER | quote }}
+        - name: NSG_POSTGRES_PASSWORD
+          value: {{ required "Missing value NSG_POSTGRES_PASSWORD" .Values.NSG_POSTGRES_PASSWORD | quote }}
+        name: nsg-referenceimplementation
+        image: {{ required "Missing value DOCKER_IMAGE_NAME" .Values.DOCKER_IMAGE_NAME | quote }}
+        imagePullPolicy: Always
+        ports:
+          - containerPort: 8080
+        resources:
+          requests:
+            memory: {{ required "Missing value NSG_REFERENCEIMPLEMENTATION_MEMORY" .Values.NSG_REFERENCEIMPLEMENTATION_MEMORY | quote }}
+        livenessProbe:
+          httpGet:
+            path: /ping
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 5
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 5
+      restartPolicy: Always
+status: {}
