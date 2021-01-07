@@ -1,2 +1,8 @@
 #DValues for production environment
 NAMESPACE: demo
+NSG_INGRESSNAME: ingress-demo
+NSG_INGRESS_IP_NAME: nsg-dev-endpoint
+NSG_INGRESS_HOSTNAME_ENV: demo.nordicsmartgovernment.brreg.no
+NSG_ALL_CERT_NAMES: nsg-dev-ut1-ssl-2,nsg-prod-ssl
+NSG_CERT_NAME_ENV: nsg-prod-ssl
+NSG_CERT_NAME_BASE: nsg-dev-ut1-ssl-2
