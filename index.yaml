@@ -3,12 +3,12 @@ entries:
   nsg-referenceimplementation:
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2021-01-07T16:56:12.1497967+01:00"
+    created: "2021-01-08T14:04:49.4127414+01:00"
     description: NSG nsg-referenceimplementation service
-    digest: b9a1f90f2597e5a39649b6d4a8397e6af0a56d707ca9c33fa534c1bae47d4216
+    digest: 2920cace652ca4d0efa60dda83261ff3789537b86722ce0dbad1a07be2cb2afa
     home: https://github.com/nordicsmartgovernment/nordicsmartgovernment
     name: nsg-referenceimplementation
     urls:
     - https://github.com/nordicsmartgovernment/helm-chart/raw/main/nsg-referenceimplementation-0.1.0.tgz
     version: 0.1.0
-generated: "2021-01-07T16:56:12.1497967+01:00"
+generated: "2021-01-08T14:04:49.4117624+01:00"
